@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Análises Completas B3 B7 B10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: coluna única de leitura, cartões em duas colunas para cada propriedade, tabelas ao lado dos gráficos. */
+:root {
+  --bg: #f6f8f5; --surface: #ffffff; --fg: #17211b; --muted: #5a6a60; --line: #d9e1db;
+  --c1: #1f4e79; --c2: #1e8a4c; --c3: #d98f00; --accent: #1e8a4c; --accent-soft: #d8efe1; --warn: #c2410c;
+  --shade: #e9edea;
+  --font-head: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1612; --surface: #172019; --fg: #e8efe9; --muted: #9db0a3; --line: #2a372e;
+    --c1: #6fa8dc; --c2: #4cc27d; --c3: #f2b138; --accent: #4cc27d; --accent-soft: #1d3a29; --warn: #f08a5d;
+    --shade: #202b24; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1612; --surface: #172019; --fg: #e8efe9; --muted: #9db0a3; --line: #2a372e;
+  --c1: #6fa8dc; --c2: #4cc27d; --c3: #f2b138; --accent: #4cc27d; --accent-soft: #1d3a29; --warn: #f08a5d;
+  --shade: #202b24; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 32px 64px; }
+h1, h2, h3 { font-family: var(--font-head); text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(1.6rem, 4.2vw, 2.4rem); font-weight: 700; }
+h2 { font-size: 1.5rem; font-weight: 700; margin-top: 48px; }
+h3 { font-size: 1.05rem; font-weight: 500; }
+.kicker { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; color: var(--accent); font-weight: 600; margin: 0 0 10px; }
+.lead { color: var(--muted); max-width: 68ch; margin: 14px 0 0; }
+.people { margin: 18px 0 0; display: grid; gap: 2px; font-size: .95rem; }
+.people b { font-weight: 600; }
+nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+nav a { color: var(--fg); text-decoration: none; border: 1px solid var(--line); background: var(--surface); padding: 6px 12px; border-radius: 999px; font-size: .88rem; }
+nav a:hover, nav a:focus-visible { border-color: var(--accent); outline: none; box-shadow: 0 0 0 2px var(--accent-soft); }
+.sec-note { color: var(--muted); max-width: 72ch; margin: 8px 0 0; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+.card.full { grid-column: 1 / -1; }
+.card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; align-items: baseline; margin-bottom: 8px; }
+.legend { display: flex; gap: 12px; font-size: .84rem; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+svg { width: 100%; height: auto; display: block; }
+svg text { fill: var(--muted); font-family: var(--font-body); font-size: 11px; }
+svg .axis { stroke: var(--line); stroke-width: 1; }
+svg .grid-l { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 3; }
+svg .limit { stroke: var(--warn); stroke-width: 1.2; stroke-dasharray: 5 4; }
+svg .limit-t { fill: var(--warn); }
+.tablewrap { overflow-x: auto; margin-top: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; font-variant-numeric: tabular-nums; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-weight: 600; background: var(--accent-soft); border-bottom: 1px solid var(--accent); }
+tbody tr:last-child td { border-bottom: 0; }
+.cap { color: var(--muted); font-size: .84rem; margin: 8px 0 0; }
+.ok { color: var(--accent); font-weight: 600; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 16px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.stat b { display: block; font-family: var(--font-head); font-size: 1.45rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat span { font-size: .82rem; color: var(--muted); }
+.formula { font-family: 'Cambria Math', 'Times New Roman', serif; background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 8px 12px; margin: 10px 0 0; border-radius: 0 6px 6px 0; font-size: .95rem; }
+details { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+summary { cursor: pointer; font-weight: 600; }
+summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+ol.refs { padding-left: 22px; font-size: .88rem; color: var(--muted); margin: 12px 0 0; }
+ol.refs li { margin-bottom: 8px; }
+.foot { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <p class="kicker">Material complementar do banner · SEMIC/UFMA 2026</p>
+  <h1>Caracterização química e desempenho mecânico da mistura de diesel marítimo com biodiesel</h1>
+  <p class="lead">Aqui estão as análises completas que não couberam no banner: todos os resultados por tempo de armazenamento (24 horas, 7, 14 e 30 dias), as amostras individuais da estabilidade oxidativa e a série bruta do ensaio no motor com a mistura B7. B3, B7 e B10 são as misturas com 3%, 7% e 10% de biodiesel de soja em volume no óleo diesel marítimo.</p>
+  <div class="people">
+    <div><b>Discente:</b> João Wesley Sousa Cardoso (PIBIC-UFMA)</div>
+    <div><b>Orientadora:</b> Prof.ª Dr.ª Janyeid Karla Castro Sousa (BICT)</div>
+    <div><b>Área:</b> Ciências Exatas</div>
+  </div>
+  <nav aria-label="Seções">
+    <a href="#fisico-quimicas">Propriedades físico-químicas</a>
+    <a href="#oxidativa">Estabilidade oxidativa</a>
+    <a href="#emissoes">Emissões teóricas</a>
+    <a href="#motor">Ensaio no motor (B7)</a>
+    <a href="#sintese">Síntese e limitações</a>
+    <a href="#referencias">Referências</a>
+  </nav>
+
+  <h2 id="fisico-quimicas">Propriedades físico-químicas ao longo do armazenamento</h2>
+  <p class="sec-note">Cada gráfico mostra as três misturas nos quatro tempos de análise. As linhas tracejadas indicam os limites da Resolução ANP nº 903/2022 quando existem; poder calorífico superior não tem especificação nessa resolução.</p>
+  <div class="grid" id="phys-grid"></div>
+
+  <h2 id="oxidativa">Estabilidade oxidativa (tempo de indução)</h2>
+  <p class="sec-note">Ensaio de estabilidade à oxidação a 110 °C, em duplicata, realizado às 24 horas, aos 7 e aos 30 dias. Quanto maior o tempo de indução, maior a resistência da mistura à degradação oxidativa. A resolução não adota limite para misturas, então o parâmetro foi monitorado.</p>
+  <div class="grid">
+    <div class="card full">
+      <div class="card-head"><h3>Tempo de indução médio por mistura</h3><div class="legend" id="ox-legend"></div></div>
+      <div id="ox-chart"></div>
+      <p class="cap">Médias das duas amostras de cada mistura. A B3 é a mais estável; a B10 mantém o menor tempo de indução.</p>
+    </div>
+  </div>
+  <div class="grid" id="ox-tables"></div>
+
+  <h2 id="emissoes">Emissões teóricas de óxidos de enxofre</h2>
+  <div class="card" style="margin-top:20px">
+    <p style="margin:0">A partir do teor de enxofre medido para a B7 aos 30 dias (0,45% em massa), estimou-se a emissão de dióxido de enxofre por balanço estequiométrico, assumindo oxidação completa (32 g de enxofre para 64 g de SO₂).</p>
+    <div class="formula">0,45% × (64 / 32) = 0,90% da massa do combustível, ou cerca de 9,0 g de SO₂ por quilograma de B7 queimado</div>
+    <p class="cap">Estimativa teórica baseada na composição química da amostra; não substitui a medição direta por analisador de gases de escape.</p>
+  </div>
+
+  <h2 id="motor">Ensaio no motor com a mistura B7</h2>
+  <p class="sec-note">Motor de ciclo Diesel acoplado a dinamômetro de bancada, em regime nominal de cerca de 1006 rotações por minuto (rpm), com registro a cada 1 a 2 segundos em 45 pontos. Os 39 primeiros pontos correspondem ao regime estacionário (rotação entre 997 e 1016 rpm) e entram nas estatísticas; os 6 finais registram o desligamento e foram excluídos (área sombreada).</p>
+  <div class="stats" id="mech-stats"></div>
+  <div class="grid">
+    <div class="card full"><div class="card-head"><h3>Rotação</h3><span class="legend">rpm</span></div><div id="m-rpm"></div></div>
+    <div class="card"><div class="card-head"><h3>Torque</h3><span class="legend">N·m</span></div><div id="m-nm"></div></div>
+    <div class="card"><div class="card-head"><h3>Potência efetiva</h3><span class="legend">kW</span></div><div id="m-kw"></div></div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h3>Torque e potência em regime estacionário</h3>
+      <div class="tablewrap"><table id="t-mech"></table></div>
+      <p class="cap">Conversões: 1 kgf·m = 9,80665 N·m; 1 CV = 735,5 W. Potência calculada por P = τ·n / 9549 diverge em média 1,7% da registrada pelo dinamômetro.</p>
+    </div>
+    <div class="card">
+      <h3>Índices de regularidade cíclica</h3>
+      <div class="tablewrap"><table id="t-idx"></table></div>
+      <p class="cap">δ = (máx − mín) / média × 100; CoV = desvio padrão / média × 100; ω = 2π·n / 60; W = 2π·τ. Valores recalculados a partir da série bruta e idênticos aos do relatório.</p>
+    </div>
+  </div>
+  <details>
+    <summary>Série bruta do ensaio (45 pontos)</summary>
+    <div class="tablewrap"><table id="t-raw"></table></div>
+  </details>
+
+  <h2 id="sintese">Síntese da conformidade e limitações</h2>
+  <div class="card" style="margin-top:20px">
+    <div class="tablewrap"><table id="t-sint"></table></div>
+    <p class="cap">Todos os parâmetros com especificação definida permaneceram dentro dos limites ao longo dos 30 dias.</p>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Limitações do estudo</h3>
+    <p style="margin:10px 0 0">A avaliação mecânica foi restrita à mistura B7, em um único ponto de operação (cerca de 1006 rpm) e sem o diesel marítimo puro como linha de base, então não é possível, neste momento, quantificar a variação de torque, potência e regularidade atribuível ao biodiesel. As emissões de óxidos de enxofre foram estimadas teoricamente, e o consumo específico e a pressão média efetiva não foram determinados.</p>
+  </div>
+
+  <h2 id="referencias">Referências</h2>
+  <details>
+    <summary>Lista completa do relatório (29 referências)</summary>
+    <ol class="refs">
+<li>BRASIL. Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Resolução ANP n.º 789, de 22 de maio de 2019. Diário Oficial da União, Brasília, DF, 23 maio 2019.</li>
+<li>BRASIL. Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Resolução ANP n.º 903, de 18 de novembro de 2022. Diário Oficial da União, Brasília, DF, 23 nov. 2022.</li>
+<li>BRASIL. Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Resolução ANP n.º 967, de 12 de abril de 2024. Diário Oficial da União, Brasília, DF, 15 abr. 2024.</li>
+<li>BRASIL. Presidência da República. Lei nº 12.187, de 29 de dezembro de 2009. Brasília, DF, 2009.</li>
+<li>CHIONG, M.-C. et al. Challenges and opportunities of marine propulsion with alternative fuels. Renewable and Sustainable Energy Reviews, v. 149, p. 111397, 2021.</li>
+<li>COMISSÃO MUNDIAL SOBRE MEIO AMBIENTE E DESENVOLVIMENTO. Our common future. Oxford: Oxford University Press, 1987.</li>
+<li>DEBNATH, V. et al. Performance, emissions, and lubricant oil analysis of a marine diesel engine powered by raw Schizochytrium sp. and its blends. Biofuels, Bioproducts and Biorefining, v. 20, n. 1, p. 136-154, 2025.</li>
+<li>DEMIRBAS, A. Progress and recent trends in biodiesel fuels. Energy Conversion and Management, v. 50, n. 1, p. 14-34, 2009.</li>
+<li>E, J. et al. Performance and emission evaluation of a marine diesel engine fueled by water biodiesel-diesel emulsion blends with a fuel additive of a cerium oxide nanoparticle. Energy Conversion and Management, v. 169, p. 194-205, 2018.</li>
+<li>EMPRESA DE PESQUISA ENERGÉTICA (EPE). IMO 2020: a nova regulamentação de combustíveis marítimos. Rio de Janeiro: EPE, 2019.</li>
+<li>GABIÑA, G. et al. Performance of marine diesel engine in propulsion mode with a waste oil-based alternative fuel. Fuel, v. 235, p. 259-268, 2019.</li>
+<li>GOKALP, B.; BUYUKKAYA, E.; SOYHAN, H. S. Performance and emissions of a diesel tractor engine fueled with marine diesel and soybean methyl ester. Biomass and Bioenergy, v. 35, n. 8, p. 3575-3583, 2011.</li>
+<li>JO, K.-S.; KONG, K.-J.; HAN, S.-H. Optimizing fuel efficiency and emissions of marine diesel engines when using biodiesel mixtures under diverse load/temperature conditions: predictive model and comprehensive life cycle analysis. Journal of Marine Science and Engineering, v. 13, n. 6, p. 1192, 2025.</li>
+<li>KALLIGEROS, S. et al. An investigation of using biodiesel/marine diesel blends on the performance of a stationary diesel engine. Biomass and Bioenergy, v. 24, n. 2, p. 141-149, 2003.</li>
+<li>LASKAR, I. I.; DOWLATABADI, H.; GIANG, A. Expert assessments of maritime shipping decarbonization pathways by 2030 and 2050. Earth's Future, v. 13, n. 4, e2024EF005255, 2025.</li>
+<li>LIN, C.-Y. Effects of biodiesel blend on marine fuel characteristics for marine vessels. Energies, v. 6, n. 9, p. 4945-4955, 2013.</li>
+<li>MATHIMANI, T. et al. Assessment of fuel properties, engine performance and emission characteristics of outdoor grown marine Chlorella vulgaris BDUG 91771 biodiesel. Renewable Energy, v. 105, p. 637-646, 2017.</li>
+<li>NOOR, C. W. M. et al. An investigation of using palm biodiesel blend on the performance of a stationary marine diesel engine. Defence S&amp;T Technical Bulletin, v. 9, n. 2, p. 86-97, 2016.</li>
+<li>NURSAL, R. S. et al. Comparative study of the performance and exhaust gas emissions of biodiesels derived from three different feedstocks with diesel on marine auxiliary diesel engine. ARPN Journal of Engineering and Applied Sciences, v. 12, n. 6, p. 2017-2027, 2017.</li>
+<li>ONU - ORGANIZAÇÃO DAS NAÇÕES UNIDAS. Transformando nosso mundo: a Agenda 2030 para o desenvolvimento sustentável. Nova Iorque: ONU, 2015.</li>
+<li>PAULAUSKIENE, T.; BUCAS, M.; LAUKINAITE, A. Alternative fuels for marine applications: biomethanol-biodiesel-diesel blends. Fuel, v. 248, p. 161-167, 2019.</li>
+<li>PETROBRAS. Combustíveis marítimos: informações técnicas (versão outubro/2024). Rio de Janeiro: Petrobras, 2024.</li>
+<li>SOUZA, L. S. A.; GUARIEIRO, L. L. N.; SANTOS, A. A. B. Avaliação experimental do desempenho de motores do ciclo Diesel utilizando misturas biodiesel/diesel marítimo. Revista Virtual de Química, v. 8, n. 4, p. 1192-1203, 2016.</li>
+<li>UNITED STATES DEPARTMENT OF AGRICULTURE (USDA). Foreign Agricultural Service. Brazil: Biofuels Annual. GAIN Report No. BR2024-0022. Brasília: USDA, 2024.</li>
+<li>VEINBLAT, M. et al. Impact of various blends of linseed oil-derived biodiesel on combustion and particle emissions of a compression ignition engine - a comparison with diesel and soybean fuels. Energy Conversion and Management, v. 178, p. 178-189, 2018.</li>
+<li>WEI, C. et al. Combustion analysis of low-speed marine engine fueled with biofuel. Journal of Marine Science and Application, v. 22, n. 4, p. 861-869, 2023.</li>
+<li>WEI, L. et al. Combustion process and NOx emissions of a marine auxiliary diesel engine fuelled with waste cooking oil biodiesel blends. Energy, v. 144, p. 73-80, 2018.</li>
+<li>WU, G. et al. Numerical method for predicting emissions from biodiesel blend fuels in diesel engines of inland waterway vessels. Journal of Marine Science and Engineering, v. 11, n. 1, p. 86, 2023.</li>
+<li>ZHAO, E. et al. Impact of high-concentration biofuels on cylinder lubricating oil performance in low-speed two-stroke marine diesel engines. Journal of Marine Science and Engineering, v. 13, n. 6, p. 1189, 2025.</li>
+    </ol>
+  </details>
+
+  <p class="foot">Fonte dos dados: Relatório PIBIC 2026 (versão 7) e planilha de aquisição do dinamômetro (Wesley.xlsx). Agradecimentos à UFMA, ao Laboratório de Pesquisa em Química Analítica de Petróleo e Biocombustíveis (LAPQAP), ao IFMA e à Vibra, que proporcionou o diesel marítimo.</p>
+</main>
+
+<script>
+const D = {"phys": {"cats": ["24 horas", "7 dias", "14 dias", "30 dias"], "pcs": {"B3": [45400, 45458, 45414, 45331], "B7": [45217, 45238, 45277, 45182], "B10": [45062, 45053, 45129, 44995]}, "fulgor": {"B3": [67.0, 67.5, 69.5, 69.5], "B7": [68.0, 68.5, 70.0, 69.0], "B10": [69.5, 69.5, 69.5, 70.0]}, "massa": {"B3": [842.12, 842.09, 842.87, 842.47], "B7": [843.57, 843.52, 843.86, 843.78], "B10": [844.8, 844.94, 844.89, 845.04]}, "visc": {"B3": [3.29, 3.07, 3.15, 3.2], "B7": [3.03, 3.09, 3.34, 3.46], "B10": [3.03, 3.2, 3.22, 3.15]}, "enx": {"B3": [0.48, 0.48, 0.47, 0.47], "B7": [0.46, 0.46, 0.46, 0.45], "B10": [0.45, 0.45, 0.44, 0.44]}}, "oxid": {"cats": ["24 horas", "7 dias", "30 dias"], "rows": {"24 horas": [["B3", 1, 3.6258, 11.72], ["B3", 2, 3.0176, 9.44], ["B7", 1, 3.0352, 7.35], ["B7", 2, 3.0051, 6.47], ["B10", 1, 3.0359, 6.19], ["B10", 2, 3.0059, 6.62]], "7 dias": [["B3", 1, 3.0559, 9.64], ["B3", 2, 3.062, 9.9], ["B7", 1, 3.0159, 7.54], ["B7", 2, 3.0021, 7.77], ["B10", 1, 3.0378, 5.46], ["B10", 2, 3.0037, 5.67]], "30 dias": [["B3", 1, 3.061, 11.32], ["B3", 2, 3.055, 11.17], ["B7", 1, 3.014, 8.0], ["B7", 2, 3.026, 8.72], ["B10", 1, 3.033, 5.79], ["B10", 2, 3.018, 5.31]]}, "mean": {"B3": [10.58, 9.77, 11.25], "B7": [6.91, 7.66, 8.36], "B10": [6.41, 5.57, 5.55]}}, "mech": {"t": [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 79, 81, 83, 85, 87, 89], "rpm": [1008, 1008, 997, 1000, 1004, 1006, 1012, 1007, 1011, 1006, 1009, 1004, 1010, 1007, 1003, 999, 1003, 997, 1000, 1002, 1008, 1011, 1012, 1016, 1008, 1008, 1004, 1010, 1007, 1004, 1005, 999, 1002, 1005, 1003, 1004, 1005, 1011, 1008, 1014, 1011, 1015, 1023, 1017, 1025], "Nm": [33.93, 33.93, 33.54, 33.54, 33.54, 33.54, 33.54, 33.93, 33.54, 33.54, 33.54, 33.93, 33.93, 33.93, 33.93, 33.93, 33.93, 33.54, 33.54, 33.54, 33.54, 33.54, 33.93, 33.93, 33.93, 33.93, 33.93, 33.93, 34.32, 34.32, 34.32, 34.32, 33.93, 33.54, 33.54, 33.93, 33.93, 33.93, 33.93, 33.93, 33.93, 32.36, 31.48, 31.09, 30.69], "kW": [3.523, 3.523, 3.442, 3.449, 3.464, 3.472, 3.494, 3.516, 3.486, 3.472, 3.479, 3.508, 3.53, 3.516, 3.501, 3.486, 3.501, 3.442, 3.449, 3.457, 3.479, 3.486, 3.538, 3.545, 3.523, 3.523, 3.508, 3.53, 3.56, 3.545, 3.552, 3.53, 3.501, 3.472, 3.464, 3.508, 3.508, 3.53, 3.523, 3.538, 3.53, 3.376, 3.317, 3.258, 3.236], "kgm": [3.46, 3.46, 3.42, 3.42, 3.42, 3.42, 3.42, 3.46, 3.42, 3.42, 3.42, 3.46, 3.46, 3.46, 3.46, 3.46, 3.46, 3.42, 3.42, 3.42, 3.42, 3.42, 3.46, 3.46, 3.46, 3.46, 3.46, 3.46, 3.5, 3.5, 3.5, 3.5, 3.46, 3.42, 3.42, 3.46, 3.46, 3.46, 3.46, 3.46, 3.46, 3.3, 3.21, 3.17, 3.13], "cv": [4.79, 4.79, 4.68, 4.69, 4.71, 4.72, 4.75, 4.78, 4.74, 4.72, 4.73, 4.77, 4.8, 4.78, 4.76, 4.74, 4.76, 4.68, 4.69, 4.7, 4.73, 4.74, 4.81, 4.82, 4.79, 4.79, 4.77, 4.8, 4.84, 4.82, 4.83, 4.8, 4.76, 4.72, 4.71, 4.77, 4.77, 4.8, 4.79, 4.81, 4.8, 4.59, 4.51, 4.43, 4.4], "n": 39}};
+const COL = { B3: 'var(--c1)', B7: 'var(--c2)', B10: 'var(--c3)' };
+const NS = 'http://www.w3.org/2000/svg';
+const f = (v, d) => Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+function niceTicks(lo, hi, n) {
+  const span = hi - lo || 1, raw = span / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(s => s >= raw) || mag * 10;
+  const t0 = Math.floor(lo / step) * step, out = [];
+  for (let v = t0; v <= hi + step * 0.001; v += step) out.push(+v.toFixed(10));
+  return out;
+}
+function el(name, attrs, parent, text) {
+  const e = document.createElementNS(NS, name);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+/* opts: xs (numeric) or cats (labels), series [{name,color,vals}], digits, limits [{y,label}], domainLimits, shade {x0,x1,label}, h, dots, xlabel */
+function lineChart(host, o) {
+  const W = o.W || 560, H = o.h || 250, m = { l: 58, r: 20, t: 14, b: o.xlabel ? 44 : 30 };
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': o.aria || 'Gráfico' }, host);
+  const xs = o.xs || o.cats.map((_, i) => i);
+  const allv = o.series.flatMap(s => s.vals);
+  let lo = Math.min(...allv), hi = Math.max(...allv);
+  if (o.domainLimits) (o.limits || []).forEach(l => { lo = Math.min(lo, l.y); hi = Math.max(hi, l.y); });
+  const pad = (hi - lo) * 0.12 || 1; lo -= pad; hi += pad;
+  const ticks = niceTicks(lo, hi, 4); lo = Math.min(lo, ticks[0]); hi = Math.max(hi, ticks[ticks.length - 1]);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs);
+  const X = v => m.l + (o.cats ? (xs.length === 1 ? 0.5 : (v - x0) / (x1 - x0)) * (W - m.l - m.r - 40) + 20 : (v - x0) / (x1 - x0) * (W - m.l - m.r));
+  const Y = v => H - m.b - (v - lo) / (hi - lo) * (H - m.t - m.b);
+  if (o.shade) el('rect', { x: X(o.shade.x0), y: m.t, width: X(o.shade.x1) - X(o.shade.x0), height: H - m.t - m.b, fill: 'var(--shade)' }, svg);
+  ticks.forEach(t => {
+    if (t < lo || t > hi) return;
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), class: 'grid-l' }, svg);
+    el('text', { x: m.l - 8, y: Y(t) + 4, 'text-anchor': 'end' }, svg, f(t, o.digits));
+  });
+  el('line', { x1: m.l, x2: W - m.r, y1: H - m.b, y2: H - m.b, class: 'axis' }, svg);
+  (o.limits || []).forEach(l => {
+    if (l.y < lo || l.y > hi) return;
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(l.y), y2: Y(l.y), class: 'limit' }, svg);
+    el('text', { x: W - m.r, y: Y(l.y) - 5, 'text-anchor': 'end', class: 'limit-t' }, svg, l.label);
+  });
+  if (o.cats) o.cats.forEach((c, i) => el('text', { x: X(xs[i]), y: H - m.b + 18, 'text-anchor': 'middle' }, svg, c));
+  else {
+    niceTicks(x0, x1, 6).forEach(t => { if (t >= x0 && t <= x1) el('text', { x: X(t), y: H - m.b + 18, 'text-anchor': 'middle' }, svg, f(t, 0)); });
+    if (o.xlabel) el('text', { x: (m.l + W - m.r) / 2, y: H - 6, 'text-anchor': 'middle' }, svg, o.xlabel);
+  }
+  if (o.shade && o.shade.label) el('text', { x: (X(o.shade.x0) + X(o.shade.x1)) / 2, y: m.t + 14, 'text-anchor': 'middle' }, svg, o.shade.label);
+  o.series.forEach(s => {
+    const pts = s.vals.map((v, i) => `${X(xs[i]).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+    el('polyline', { points: pts, fill: 'none', stroke: s.color, 'stroke-width': 2.2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+    if (o.dots !== false) s.vals.forEach((v, i) => {
+      const c = el('circle', { cx: X(xs[i]), cy: Y(v), r: 3.6, fill: s.color, stroke: 'var(--surface)', 'stroke-width': 1.5 }, svg);
+      el('title', {}, c, `${s.name}, ${o.cats ? o.cats[i] : f(xs[i], 0) + ' s'}: ${f(v, o.digits)}`);
+    });
+  });
+}
+function legend(hostEl) {
+  hostEl.innerHTML = ['B3', 'B7', 'B10'].map(k => `<span><i style="background:${COL[k]}"></i>${k}</span>`).join('');
+}
+function simpleTable(host, head, rows) {
+  host.innerHTML = '<thead><tr>' + head.map(h => `<th>${h}</th>`).join('') + '</tr></thead><tbody>' +
+    rows.map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody>';
+}
+
+/* ---- propriedades físico-químicas ---- */
+const PH = [
+  { key: 'pcs', title: 'Poder calorífico superior (J/g)', digits: 0, aria: 'Poder calorífico superior por tempo', note: 'Sem especificação na Resolução ANP nº 903/2022; oscilação inferior a 0,1 MJ/kg em 30 dias.' },
+  { key: 'fulgor', title: 'Ponto de fulgor (°C)', digits: 1, limits: [{ y: 60, label: 'mínimo 60' }], domainLimits: true, aria: 'Ponto de fulgor por tempo', note: 'Todas as misturas acima do mínimo de 60 °C; o biodiesel elevou o ponto de fulgor.' },
+  { key: 'massa', title: 'Massa específica a 20 °C (kg/m³)', digits: 2, aria: 'Massa específica por tempo', note: 'Limite máximo de 876,8 kg/m³ (fora da escala do gráfico); aumento discreto com o teor de biodiesel.' },
+  { key: 'visc', title: 'Viscosidade cinemática a 40 °C (cSt)', digits: 2, limits: [{ y: 6, label: 'máximo 6,0' }, { y: 2, label: 'mínimo 2,0' }], domainLimits: true, aria: 'Viscosidade cinemática por tempo', note: 'Faixa operacional de 2,0 a 6,0 cSt; pequenas elevações ao longo do armazenamento.' },
+  { key: 'enx', title: 'Teor de enxofre (% m/m)', digits: 2, limits: [{ y: 0.5, label: 'máximo 0,5' }], domainLimits: true, aria: 'Teor de enxofre por tempo', note: 'Diluição do enxofre pelo biodiesel; limite de 0,5% m/m cumprido por todas as misturas.' },
+];
+const grid = document.getElementById('phys-grid');
+PH.forEach(p => {
+  const card = document.createElement('div'); card.className = 'card';
+  card.innerHTML = `<div class="card-head"><h3>${p.title}</h3><div class="legend"></div></div><div class="chart"></div><div class="tablewrap"><table></table></div><p class="cap">${p.note}</p>`;
+  grid.appendChild(card);
+  legend(card.querySelector('.legend'));
+  const d = D.phys[p.key];
+  lineChart(card.querySelector('.chart'), { cats: D.phys.cats, digits: p.digits, limits: p.limits, domainLimits: p.domainLimits, aria: p.aria,
+    series: ['B3', 'B7', 'B10'].map(k => ({ name: k, color: COL[k], vals: d[k] })) });
+  simpleTable(card.querySelector('table'), ['Tempo', 'B3', 'B7', 'B10'],
+    D.phys.cats.map((c, i) => [c, f(d.B3[i], p.digits), f(d.B7[i], p.digits), f(d.B10[i], p.digits)]));
+});
+
+/* ---- estabilidade oxidativa ---- */
+legend(document.getElementById('ox-legend'));
+lineChart(document.getElementById('ox-chart'), { cats: D.oxid.cats, digits: 1, W: 1000, h: 250, aria: 'Tempo de indução médio por mistura',
+  series: ['B3', 'B7', 'B10'].map(k => ({ name: k, color: COL[k], vals: D.oxid.mean[k] })) });
+const oxHost = document.getElementById('ox-tables');
+D.oxid.cats.forEach((c, ci) => {
+  const card = document.createElement('div'); card.className = 'card';
+  card.innerHTML = `<h3>Após ${c}</h3><div class="tablewrap"><table></table></div><p class="cap">Médias: B3 ${f(D.oxid.mean.B3[ci], 2)} h; B7 ${f(D.oxid.mean.B7[ci], 2)} h; B10 ${f(D.oxid.mean.B10[ci], 2)} h.</p>`;
+  oxHost.appendChild(card);
+  simpleTable(card.querySelector('table'), ['Mistura', 'Amostra', 'Massa (g)', 'Indução (h)'],
+    D.oxid.rows[c].map(r => [r[0], r[1], f(r[2], c === '30 dias' ? 3 : 4), f(r[3], 2)]));
+});
+
+/* ---- ensaio no motor ---- */
+const M = D.mech, n = M.n;
+const mean = a => a.reduce((s, v) => s + v, 0) / a.length;
+const sd = a => { const m = mean(a); return Math.sqrt(a.reduce((s, v) => s + (v - m) ** 2, 0) / (a.length - 1)); };
+const st = a => a.slice(0, n);
+const stats = { rpm: st(M.rpm), Nm: st(M.Nm), kW: st(M.kW) };
+const tEnd = M.t[n - 1], tAll = M.t[M.t.length - 1];
+const shade = { x0: M.t[n - 1] + 0.5, x1: tAll, label: 'desligamento' };
+const one = (id, vals, digits, name, color, W) => lineChart(document.getElementById(id), { xs: M.t, digits, W: W || 560, h: W ? 240 : 230, xlabel: 'Tempo de ensaio (s)', shade, dots: false, aria: name,
+  series: [{ name, color, vals }] });
+one('m-rpm', M.rpm, 0, 'Rotação', 'var(--c3)', 1000);
+one('m-nm', M.Nm, 1, 'Torque', 'var(--c1)');
+one('m-kw', M.kW, 2, 'Potência efetiva', 'var(--c2)');
+const idx = a => ({ d: (Math.max(...a) - Math.min(...a)) / mean(a) * 100, c: sd(a) / mean(a) * 100 });
+document.getElementById('mech-stats').innerHTML = [
+  [f(mean(stats.rpm), 0) + ' rpm', 'rotação média'],
+  [f(mean(stats.Nm), 1) + ' N·m', 'torque médio'],
+  [f(mean(stats.kW), 2) + ' kW', 'potência efetiva média'],
+  [f(n, 0) + ' de 45', 'pontos em regime estacionário'],
+].map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+const kgm = M.kgm.slice(0, n), cv = M.cv.slice(0, n);
+simpleTable(document.getElementById('t-mech'), ['Parâmetro', 'Média', 'Mínimo', 'Máximo'], [
+  ['Rotação (rpm)', f(mean(stats.rpm), 0), f(Math.min(...stats.rpm), 0), f(Math.max(...stats.rpm), 0)],
+  ['Torque (kgf·m)', f(mean(kgm), 2), f(Math.min(...kgm), 2), f(Math.max(...kgm), 2)],
+  ['Torque (N·m)', f(mean(stats.Nm), 1), f(Math.min(...stats.Nm), 1), f(Math.max(...stats.Nm), 1)],
+  ['Potência (CV)', f(mean(cv), 2), f(Math.min(...cv), 2), f(Math.max(...cv), 2)],
+  ['Potência (kW)', f(mean(stats.kW), 2), f(Math.min(...stats.kW), 2), f(Math.max(...stats.kW), 2)],
+]);
+const ir = idx(stats.rpm), it = idx(kgm), ip = idx(cv);
+simpleTable(document.getElementById('t-idx'), ['Índice', 'Valor'], [
+  ['Grau de irregularidade da rotação, δn', f(ir.d, 2) + ' %'],
+  ['Grau de irregularidade do torque, δτ', f(it.d, 2) + ' %'],
+  ['Grau de irregularidade da potência, δP', f(ip.d, 2) + ' %'],
+  ['Coeficiente de variação da rotação, CoV(n)', f(ir.c, 2) + ' %'],
+  ['Coeficiente de variação do torque, CoV(τ)', f(it.c, 2) + ' %'],
+  ['Coeficiente de variação da potência, CoV(P)', f(ip.c, 2) + ' %'],
+  ['Velocidade angular média, ω', f(2 * Math.PI * mean(stats.rpm) / 60, 1) + ' rad/s'],
+  ['Trabalho por rotação, W = 2π·τ', f(2 * Math.PI * mean(kgm) * 9.80665, 1) + ' J'],
+]);
+simpleTable(document.getElementById('t-raw'), ['Ponto', 'Tempo (s)', 'Rotação (rpm)', 'Torque (N·m)', 'Potência (kW)', 'Situação'],
+  M.t.map((t, i) => [i + 1, f(t, 0), f(M.rpm[i], 0), f(M.Nm[i], 2), f(M.kW[i], 2), i < n ? 'regime estacionário' : 'desligamento (excluído)']));
+
+/* ---- síntese ---- */
+simpleTable(document.getElementById('t-sint'), ['Parâmetro', 'Limite de referência', 'Faixa obtida', 'Situação'], [
+  ['Aspecto', 'Límpido e isento de impurezas', 'Límpido, sem sedimentos', '<span class="ok">Conforme</span>'],
+  ['Massa específica (kg/m³)', 'máximo de 876,8', '842,09 a 845,04', '<span class="ok">Conforme</span>'],
+  ['Viscosidade a 40 °C (cSt)', '2,0 a 6,0', '3,03 a 3,46', '<span class="ok">Conforme</span>'],
+  ['Ponto de fulgor (°C)', 'mínimo de 60', '67,0 a 70,0', '<span class="ok">Conforme</span>'],
+  ['Teor de enxofre (% m/m)', 'máximo de 0,5', '0,44 a 0,48', '<span class="ok">Conforme</span>'],
+  ['Poder calorífico superior (J/g)', 'sem limite mínimo', '44.995 a 45.458', 'Sem especificação'],
+  ['Tempo de indução (h)', 'não adotado neste estudo', '5,31 a 11,72', 'Monitorado'],
+]);
+</script>
+
+</body>
+</html>
